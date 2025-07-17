@@ -1,0 +1,29 @@
+.main-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e8e8e8;
+  box-shadow: 0px 1px 1px 0px #0000000d;
+}
+.header {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.header-text {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  color: rgb(56, 55, 55);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.5s ease;
+}
+
+.header-text:hover {
+  text-decoration-color: black;
+}

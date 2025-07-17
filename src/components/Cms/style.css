@@ -1,0 +1,42 @@
+.main-cms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box-container {
+  background-color: #fff7ec;
+  width: 50%;
+  max-width: 600px;
+  height: 200px;
+  border: 1px solid rgba(128, 128, 128, 0.529);
+  border-radius: 4px;
+  padding: 25px;
+  display: flex;
+}
+
+.cms-btn {
+  background-color: #e9d7bf;
+  padding: 5px 20px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  font-size: 12px;
+  margin: 10px 15px 10px 0;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.cms-btn:hover {
+  background-color: #a49888;
+}
+
+.textarea-container {
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    max-width: 500px;
+  }
+}
