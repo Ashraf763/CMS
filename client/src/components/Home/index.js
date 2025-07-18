@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import Header from "../Header";
 import MyImage from "../../images/style-frame-asset.png";
 import "./style.css";
@@ -41,68 +45,95 @@ const features2 = [
   },
 ];
 
-const Home = () => (
-  <div className="main-home">
-    <Header />
+const Home = () => {
+  const [heading, setHeading] = useState("");
 
-    <div className="Home-container">
-      <div className="container color-background">
-        <div className="container-2">
-          <div className="banner-text-container">
-            <h1>
-              Hyper boost Your Revenue Management, Marketing and Commercial
-              Functions with Business Ready AI
-            </h1>
-            <p>
-              Powerful AI solutions that go beyond mere data sorting and
-              exploration. Use our array of AI enabled solutions that understand
-              your business and recommend the optimal way forward. 
-            </p>
-            <button type="button">Get started</button>
-          </div>
+  const navigate = useNavigate();
 
-          <div className="banner-image-container">
-            <img src={MyImage} alt="style-frame-asset" />
-          </div>
-        </div>
-      </div>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/heading");
+        setHeading(response?.data?.text);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      <div className="container">
-        <div className="main-progress-bar">
-          <ul className="features-container">
-            {features1.map((each, index) => (
-              <li key={index} className="each-feature">
-                <div className="icon-container">{each.icon}</div>
-                <h4>{each.text}</h4>
-                <p>{each.desc}</p>
-              </li>
-            ))}
-          </ul>
+    fetchData();
+  }, []);
 
-          <div className="progress-bar">
-            <div className="line">
-              <div className="green-section"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
+  return (
+    <div className="main-home">
+      <Header />
+
+      <div className="Home-container">
+        <div className="container color-background">
+          <div className="container-2">
+            <div className="banner-text-container">
+              <h1>
+                {heading
+                  ? heading
+                  : " Hyper boost Your Revenue Management, Marketing and Commercial Functions with Business Ready AI"}
+              </h1>
+              <p>
+                Powerful AI solutions that go beyond mere data sorting and
+                exploration. Use our array of AI enabled solutions that
+                understand your business and recommend the optimal way forward. 
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  navigate("/cms");
+                }}
+              >
+                Get started
+              </button>
+            </div>
+
+            <div className="banner-image-container">
+              <img src={MyImage} alt="style-frame-asset" />
             </div>
           </div>
+        </div>
 
-          <ul className="features-container second">
-            {features2.map((each, index) => (
-              <li key={index} className="each-feature">
-                <div className="icon-container">{each.icon}</div>
-                <h4>{each.text}</h4>
-                <p>{each.desc}</p>
-              </li>
-            ))}
-          </ul>
+        <div className="container">
+          <div className="main-progress-bar">
+            <ul className="features-container">
+              {features1.map((each, index) => (
+                <li key={index} className="each-feature">
+                  <div className="icon-container">{each.icon}</div>
+                  <h4>{each.text}</h4>
+                  <p>{each.desc}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="progress-bar">
+              <div className="line">
+                <div className="green-section"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+                <div className="dot"></div>
+              </div>
+            </div>
+
+            <ul className="features-container second">
+              {features2.map((each, index) => (
+                <li key={index} className="each-feature">
+                  <div className="icon-container">{each.icon}</div>
+                  <h4>{each.text}</h4>
+                  <p>{each.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Home;
