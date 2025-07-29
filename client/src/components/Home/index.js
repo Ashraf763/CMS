@@ -14,6 +14,11 @@ import {
   PiBagLight,
 } from "react-icons/pi";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const API_URL = process.env.REACT_APP_API_URI;
+
 const features1 = [
   {
     icon: <MdKeyboardDoubleArrowRight />,
@@ -47,16 +52,19 @@ const features2 = [
 
 const Home = () => {
   const [heading, setHeading] = useState("");
+  const [isLoading, setisLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/heading");
+        const response = await axios.get(`${API_URL}/api/heading`);
         setHeading(response?.data?.text);
       } catch (error) {
         console.log(error);
+      } finally {
+        setisLoading(false);
       }
     };
 
@@ -71,11 +79,17 @@ const Home = () => {
         <div className="container color-background">
           <div className="container-2">
             <div className="banner-text-container">
-              <h1>
-                {heading
-                  ? heading
-                  : " Hyper boost Your Revenue Management, Marketing and Commercial Functions with Business Ready AI"}
-              </h1>
+              {isLoading ? (
+                <h1>
+                  <Skeleton width={500} />
+                </h1>
+              ) : (
+                <h1>
+                  {heading
+                    ? heading
+                    : " Hyper boost Your Revenue Management, Marketing and Commercial Functions with Business Ready AI"}
+                </h1>
+              )}
               <p>
                 Powerful AI solutions that go beyond mere data sorting and
                 exploration. Use our array of AI enabled solutions that

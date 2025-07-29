@@ -41,3 +41,9 @@
   max-width: 500px;
   padding: 10px 6px;
 }
+
+.heading-btn-cms {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
